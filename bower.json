@@ -1,0 +1,22 @@
+{
+  "name": "minhas-notas",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "johel <johel.carvalho@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.5",
+    "angular-ui-router": "ui-router#~0.2.18"
+  }
+}
