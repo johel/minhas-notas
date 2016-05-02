@@ -30,20 +30,33 @@ module.exports = function(sequelize, Sequelize){
     freezeTableName: true,
     instanceMethods: {
       hashPassword: function(password) {
-        return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+        var hashedPassword = crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+        console.log('salt', this.salt);
+        console.log('hashedPassword', hashedPassword);
+        return hashedPassword;
       },
       authenticate: function(password) {
-        return this.password === this.hashPassword(password);
+        var hashedPassword = this.hashPassword(password);
+        return hashedPassword === this.password;
       }
-    }
+    },
+      hooks: {
+        beforeCreate: function(user, options) {
+          if (user.password) {
+            user.salt = crypto.randomBytes(16).toString('base64');
+            user.password = user.hashPassword(user.password);
+          }
+        }
+     }
   });
 
-  User.hook('beforeValidate', function(user, options) {
-    if (this.password) {
-      this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
-      this.password = this.hashPassword(this.password);
-    }
-  })
+  // User.hook('beforeCreate', function(user, options) {
+  //   console.log('before create dssssssssss');
+  //   if (this.password) {
+  //     this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+  //     this.password = this.hashPassword(this.password);
+  //   }
+  // })
 
   return User;
 

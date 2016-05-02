@@ -5,12 +5,28 @@ var models = require('../../config/sequelize');
 var User = models.User,
 		passport = require('passport');
 
+exports.signin = function(req, res, next) {
+  //passport.authenticate returns a middleware when invoked
+  //Before going to callback specified, passport goes to Local Strategy defined at local.js
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+    	 return next(err); 
+  	}
 
+    if (!user) { return res.redirect('/signin'); }
+
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/');
+    });
+    
+  })(req, res, next);
+}
 
 exports.renderSignin = function(req, res, next) {
 	if (!req.user) {
 		res.render('signin', {
-			title: 'Sign-in Form'
+			title: 'Signin '
 		});
 	} else {
 		return res.redirect('/');
@@ -20,7 +36,7 @@ exports.renderSignin = function(req, res, next) {
 exports.renderSignup = function(req, res, next) {
 	if (!req.user) {
 		res.render('signup', {
-			title: 'Sign-up Form'
+			title: 'Signup'
 		});
 	} else {
 		return res.redirect('/');
@@ -56,7 +72,7 @@ exports.signout = function(req, res) {
 	// Passport 'logout' 
 	req.logout();
 
-	res.redirect('/');
+	res.redirect('/signin');
 };
 
 //middleware

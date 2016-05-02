@@ -14,7 +14,7 @@ module.exports = function() {
 	passport.use(new LocalStrategy(function(username, password, done) {
 		// Use the 'User' model 'findOne' method to find a user with the current username
 		User.findOne({
-			username: username
+			where: {username: username}
 		}).then(function(user) {
 			
 			// If a user was not found, continue to the next middleware with an error message

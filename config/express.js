@@ -7,6 +7,7 @@ var config = require('./config'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
+	flash = require('connect-flash'),
 	passport = require('passport');
 
 module.exports = function() {
@@ -32,6 +33,8 @@ module.exports = function() {
 	app.set('views', './server/views');
 	app.set('view engine', 'ejs');
 
+	//it is used in passport - ex:failureFlash: true
+	app.use(flash());
 
 	// Configure the Passport middleware
 	app.use(passport.initialize());
@@ -39,6 +42,7 @@ module.exports = function() {
 
 	// Load the routing files
 	require('../server/routes/users.server.routes.js')(app);
+	require('../server/routes/notes.server.routes.js')(app);
 
 	// Configure static file serving relative to the directory from where you launch your node process
 	// http://expressjs.com/en/starter/static-files.html
