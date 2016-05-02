@@ -7,38 +7,35 @@ module.exports = function(sequelize, Sequelize){
   var crypto = require('crypto');
 
   var User = sequelize.define('users', {
-    firstName: {
-      type: Sequelize.STRING,
-      field: 'first_name'
-    },
-    lastName: {
-      type: Sequelize.STRING,
-      field: 'last_name'
-    },
     email: {
       type: Sequelize.STRING,
       unique:true,
       field: 'email',
       validate:{isEmail: true}
     },
+    username: {
+      unique:true,
+      type: Sequelize.STRING,
+      field: 'username'
+    },
     password: {
       type: Sequelize.STRING,
       field: 'password'
+    },
+    salt: {
+      type: Sequelize.STRING,
+      field: 'salt'
     }
-    // salt: {
-    //   type: Sequelize.STRING,
-    //   field: 'salt'
-    // }
   }, {
     freezeTableName: true,
-    classMethods: {
+    instanceMethods: {
       hashPassword: function(password) {
         return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
       },
       authenticate: function(password) {
         return this.password === this.hashPassword(password);
       }
-    },
+    }
   });
 
   User.hook('beforeValidate', function(user, options) {

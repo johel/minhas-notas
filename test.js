@@ -11,23 +11,24 @@ var sequelize = new Sequelize(sequelizeConfig.db, sequelizeConfig.username, sequ
 //psql -d postgres(database)
 
 var User = sequelize.define('users', {
-  firstName: {
-    type: Sequelize.STRING,
-    field: 'first_name'
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    field: 'last_name'
-  },
   email: {
     type: Sequelize.STRING,
     unique:true,
     field: 'email',
     validate:{isEmail: true}
   },
+  username: {
+    unique:true,
+    type: Sequelize.STRING,
+    field: 'username'
+  },
   password: {
     type: Sequelize.STRING,
     field: 'password'
+  },
+  salt: {
+    type: Sequelize.STRING,
+    field: 'salt'
   }
 }, {
   freezeTableName: true
@@ -43,12 +44,12 @@ var User = sequelize.define('users', {
 // });
 
 
-var createdUser = User.sync().then(function () {
+var createdUser = User.sync({force:true}).then(function () {
   return User.create({
-    firstName: 'teste1',
-    lastName: 'teste1',
     email:'teste1@gmail.com',
-    password:'teste1'
+    username:'teste1',
+    password:'teste1',
+    salt:'salt'
   });
 }, function(error){
   console.log('error', error);
