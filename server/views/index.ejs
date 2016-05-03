@@ -6,7 +6,7 @@
 <body>
 
 	<h2> <%= user.username %> </h2>
-	<section ng-view></section>
+	<section ui-view></section>
 
 	<script type="text/javascript">
 		window.user = <%- JSON.stringify(user) || 'null' %>;
@@ -19,12 +19,12 @@
 	<script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
 	
 	<!-- notes -->
-<!-- 	<script type="text/javascript" src="/notes/notes.client.module.js"></script>
+	<script type="text/javascript" src="/notes/notes.client.module.js"></script>
 	<script type="text/javascript" src="/notes/controllers/notes.client.controller.js"></script>
 	<script type="text/javascript" src="/notes/services/notes.client.service.js"></script>
-	<script type="text/javascript" src="/notes/config/notes.client.routes.js"></script> -->
+	<!-- <script type="text/javascript" src="/notes/config/notes.client.routes.js"></script> -->
 
 	<!-- app -->
-	<!-- <script type="text/javascript" src="/app.js"></script> -->
+	<script type="text/javascript" src="/app.js"></script>
 </body>
 </html>
