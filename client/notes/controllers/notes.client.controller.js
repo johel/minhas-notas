@@ -1,7 +1,10 @@
 var app = angular.module('notes');
 
-app.controller('notesCtrl', function($scope, Notes){
+app.controller('notesCtrl', function($scope, NoteService){
 
-	$scope.message = JSON.stringify(Notes.notes);
+	$scope.notes = NoteService.notes;
+	$scope.addNote = function(){
+		NoteService.add({});
+	}
 
 });

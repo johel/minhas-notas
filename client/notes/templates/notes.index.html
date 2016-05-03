@@ -1,2 +1,24 @@
-<h1>{{message}}<h1>
+<header>
+	<nav id="menu">
+		<ul class="horizontalList">
+			<li><a ng-click="addNote()" id="add-link" href="#" title="Add a note.">+</a></li>
+			<li><input type="text" id="search-text" name="search-text" placeholder="Search"/> <span><a href="#" id="clear-search">x Clear search</a></span></li>
+		</ul>
+	</nav>
+</header>
 
+<section id="content">			
+	<ul id="notes" class="ui-sortable">
+	
+	<li class="note" ng-repeat="note in notes track by $index">
+		<input type="hidden" class="note-id" value="1">
+		<div class="content-wrapper" style="background-color: rgb(255, 247, 153);">
+			<div class="content" contenteditable="true">
+			{{::note.text}}
+			</div>
+		</div>
+		<p class="actions"><a href="#" class="delete">Delete</a></p>
+	</li>
+		
+	</ul>
+</section>	
