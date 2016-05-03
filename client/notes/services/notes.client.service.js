@@ -18,15 +18,16 @@ app.factory('NoteService', function($http){
 			this.notes.push(note);
 		},
 		findIndexById: function(id){
-		 	var index = 0;
-		 	this.notes.forEach(function(el){
-				if(el.id === id){
-					return index;
+		 	var index = -1;
+		 	var notes = this.notes;
+		 	for (var i = 0; i < notes.length; i++) {
+		 		if(notes[i].id === id){
+					index = i;
+					break;
 				}
-				index +=1;
-			})
+		 	};
 
-			return -1;
+			return index;
 		},
 		update:function(note){
 			var index = this.findIndexById(note.id);
@@ -34,9 +35,13 @@ app.factory('NoteService', function($http){
 			existingNote.text = note.text;
 		},
 		delete:function(note){
+			console.log('id', note.id);
 			var index = this.findIndexById(note.id);
-			var existingNote = this.notes[index];
-			existingNote.deleted = true;
+			console.log('index', index);
+			// var existingNote = this.notes[index];
+			// existingNote.deleted = true;
+			
+			this.notes.splice(index, 1);
 		}
 	}
 

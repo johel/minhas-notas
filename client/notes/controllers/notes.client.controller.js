@@ -6,5 +6,8 @@ app.controller('notesCtrl', function($scope, NoteService){
 	$scope.addNote = function(){
 		NoteService.add({});
 	}
+	$scope.delete = function(note){
+		NoteService.delete(note);
+	}
 
 });
