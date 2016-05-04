@@ -25,3 +25,55 @@ module.directive('onEscape', function ($timeout) {
 		});
 	};
 });
+
+
+
+// module.directive('contenteditable', function() {
+//   return {
+// 	  require: 'ngModel',
+// 	  link: function(scope, elm, attrs, ctrl) {
+// 	      // view -> model
+// 	      elm.bind('blur', function() {
+// 	          scope.$apply(function() {
+// 	              ctrl.$setViewValue(elm.html());
+// 	              console.log(scope.note.text, 'text');
+// 	              console.log('ctrl', ctrl);
+// 	          });
+// 	      });
+
+// 	      // model -> view
+// 	      ctrl.$render = function() {
+// 	          elm.html(ctrl.$viewValue);
+// 	      };
+
+// 	      // load init value from DOM
+// 	      // ctrl.$setViewValue(elm.html());
+// 	  }
+//   };
+// });
+
+
+module.directive('onEdit', function($timeout) {
+  return {
+	  require: ['ngModel'],
+	  link: function(scope, elm, attrs, controllers) {
+	  		console.log('link function on edit')
+	      var modelCtrl = controllers[0];
+	      // view -> model
+	      elm.bind('blur', function() {
+	      		console.log('blur callback in link function')
+	          scope.$apply(function() {
+	              modelCtrl.$setViewValue(elm.html());
+	          });
+ 						// scope.$apply(attrs.onEdit);
+ 						scope.$evalAsync( attrs.onEdit )
+
+	      });
+
+	      // model -> view
+	      modelCtrl.$render = function() {
+	          elm.html(modelCtrl.$viewValue);
+	      };
+	  }
+  };
+});

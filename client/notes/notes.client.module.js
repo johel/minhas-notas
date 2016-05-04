@@ -1,4 +1,4 @@
 
 'use strict';
 
-var app = angular.module('notes',[]);
+var app = angular.module('notes',['ngSanitize']);

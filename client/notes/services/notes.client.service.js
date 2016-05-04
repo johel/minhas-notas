@@ -6,7 +6,7 @@ app.factory('NoteService', function($http){
 	for (var i = 1; i < len; i+=1) {
 		notes.push({
 			id:i,
-			text:'Lembrete ' + i,
+			text:' <b>Lembrete</b> ' + i + '<div>teste</div>',
 			date: new Date(2016,1,i),
 			deleted:false
 		})
@@ -33,6 +33,7 @@ app.factory('NoteService', function($http){
 			var index = this.findIndexById(note.id);
 			var existingNote = this.notes[index];
 			existingNote.text = note.text;
+			console.log('text',existingNote.text)
 		},
 		delete:function(note){
 			console.log('id', note.id);

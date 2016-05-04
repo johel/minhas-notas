@@ -16,8 +16,8 @@
 	
 	<li class="note" ng-repeat="note in notes track by $index">
 		<div class="content-wrapper" style="background-color: rgb(255, 247, 153);">
-			<div ng-blur="saveEdits(note,$event)" class="content" contenteditable="true" on-escape="revertEdits(note)">
-			{{note.text}}
+			<div ng-bind-html="note.text" ng-model="note.text"
+				  class="content" contenteditable="true" on-edit="saveEdits(note)" on-escape="revertEdits(note)">
 			</div>
 		</div>
 		<p class="actions"  ng-click="delete(note)"><a href="#" class="delete">Delete</a></p>

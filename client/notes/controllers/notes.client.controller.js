@@ -11,22 +11,18 @@ app.controller('notesCtrl', function($scope,$timeout, NoteService){
 	}
 
 	$scope.saveEdits = function (note, $event) {
-
-		console.log('antes');
+		console.log('saveEdits');
+		
 		if ($scope.reverted) {
 			$scope.reverted = false;
 			return;
 		}
 
-		console.log('depois');
-		console.log('note', note);
-		console.log('event', $event.target.innerHTML);
-
-
+		NoteService.update(note);
 	};
 
 	$scope.revertEdits = function (note) {
-		console.log('chegou em revert edits');
+		console.log('evert edits');
 		$scope.reverted = true;
 
 
