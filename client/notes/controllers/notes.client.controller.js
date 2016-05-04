@@ -2,7 +2,13 @@ var app = angular.module('notes');
 
 app.controller('notesCtrl', function($scope,$timeout, NoteService){
 
-	$scope.notes = NoteService.notes;
+	NoteService.get().then(function(notes){
+		$scope.notes = NoteService.notes;
+	}, function(err){
+		console.log('err', err);
+	})
+
+	
 	$scope.addNote = function(){
 		NoteService.add({});
 	}

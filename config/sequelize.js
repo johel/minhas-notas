@@ -11,7 +11,7 @@ var sequelize = new Sequelize(sequelizeConfig.db, sequelizeConfig.username, sequ
 var model = {};
 
 model.User = require('../server/models/user.server.model')(sequelize, Sequelize);
-// model.Note = require('../server/model/note.server.model')(sequelize, Sequelize);
+model.Note = require('../server/models/note.server.model')(sequelize, Sequelize);
 model.sequelize = sequelize;
 model.Sequelize = Sequelize;
 

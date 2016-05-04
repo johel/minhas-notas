@@ -1,19 +1,40 @@
 var app = angular.module('notes');
 
-app.factory('NoteService', function($http){
-	var len = 4;
-	var notes = [];
-	for (var i = 1; i < len; i+=1) {
-		notes.push({
-			id:i,
-			text:' <b>Lembrete</b> ' + i + '<div>teste</div>',
-			date: new Date(2016,1,i),
-			deleted:false
-		})
-	};
+app.factory('NoteService', function($http, $q){
+	
+	// var len = 4;
+	// var notes = [];
+	// for (var i = 1; i < len; i+=1) {
+	// 	notes.push({
+	// 		id:i,
+	// 		text:' <b>Lembrete</b> ' + i + '<div>teste</div>',
+	// 		date: new Date(2016,1,i),
+	// 		deleted:false
+	// 	})
+	// };
 	
 	var service = {
-		notes: notes,
+		notes: [],
+		get: function(){
+			var that = this;
+			var url = 'api/notes';
+			var request = $http.get(url);
+			var d = $q.defer();
+
+			request.then(function(response){
+				var results = response.data;
+				angular.forEach(results,function(item, key){
+					that.notes.push(item)
+				});
+				d.resolve();
+
+			}, function(error){
+				d.reject(error)
+			})
+
+			return d.promise;
+
+		},
 		add:function(note){
 			this.notes.push(note);
 		},

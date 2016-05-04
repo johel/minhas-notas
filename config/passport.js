@@ -16,7 +16,7 @@ module.exports = function() {
 	passport.deserializeUser(function(id, done) {
 		User.findOne({
 			where: {id: id},
-			attributes: ['email', 'username']
+			attributes: ['email', 'username', 'id']
 		}).then(function(user) {
 			done(null, user);
 		}).catch(function(err){

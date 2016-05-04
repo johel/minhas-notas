@@ -10,54 +10,24 @@ module.directive('onEscape', function ($timeout) {
 			if (event.keyCode === ESCAPE_KEY) {
 				scope.$apply(attrs.onEscape);
 				$timeout(function () {
-							// console.log('elem inside link', elem);
-							// console.log('scope inside link', scope);
-							elem.html(scope.note.text);
-							elem[0].blur();
-							//just to be sure element will lose focus 
-							// elem[0].parentElement.focus();
-						}, 0, false);
-				}
+						elem.html(scope.note.text);
+						elem[0].blur();
+					}, 0, false);
+			}
 		});
 
 		scope.$on('$destroy', function () {
 			elem.unbind('keydown');
 		});
+		
 	};
 });
 
 
-
-// module.directive('contenteditable', function() {
-//   return {
-// 	  require: 'ngModel',
-// 	  link: function(scope, elm, attrs, ctrl) {
-// 	      // view -> model
-// 	      elm.bind('blur', function() {
-// 	          scope.$apply(function() {
-// 	              ctrl.$setViewValue(elm.html());
-// 	              console.log(scope.note.text, 'text');
-// 	              console.log('ctrl', ctrl);
-// 	          });
-// 	      });
-
-// 	      // model -> view
-// 	      ctrl.$render = function() {
-// 	          elm.html(ctrl.$viewValue);
-// 	      };
-
-// 	      // load init value from DOM
-// 	      // ctrl.$setViewValue(elm.html());
-// 	  }
-//   };
-// });
-
-
-module.directive('onEdit', function($timeout) {
+module.directive('onEdit', function() {
   return {
 	  require: ['ngModel'],
 	  link: function(scope, elm, attrs, controllers) {
-	  		console.log('link function on edit')
 	      var modelCtrl = controllers[0];
 	      // view -> model
 	      elm.bind('blur', function() {
