@@ -12,6 +12,7 @@ module.exports = function(app){
 	   .post(notes.create);
 
  	app.route('/api/note/:noteId')
+ 		.put(notes.update)
  		.delete(notes.delete);
 
 	// Set up the 'noteId' parameter middleware   

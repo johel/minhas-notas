@@ -41,11 +41,15 @@ app.factory('NoteService', function($http, $q){
 
 			return d.promise;
 		},
-		update:function(note){
-			var index = this.findIndexById(note.id);
-			var existingNote = this.notes[index];
-			existingNote.text = note.text;
-			console.log('text',existingNote.text)
+		update:function(note, originalNote){
+			var that = this;
+			return $http.put('/api/note/' + note.id, {text:note.text})
+				.then(function (savedNote) {
+					return savedNote;
+				}, function (error) {
+					that.notes[that.notes.indexOf(note)].text = originalNote.text;
+					return false;
+				});
 		},
 		delete: function (note) {
 			var that = this;

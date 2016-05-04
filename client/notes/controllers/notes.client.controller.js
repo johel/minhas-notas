@@ -1,9 +1,11 @@
 var app = angular.module('notes');
 
 app.controller('notesCtrl', function($scope,$timeout, NoteService){
+	var notes;
 
-	NoteService.get().then(function(notes){
+	NoteService.get().then(function(result){
 		$scope.notes = NoteService.notes;
+		notes = $scope.notes;
 	}, function(err){
 		console.log('err', err);
 	})
@@ -21,7 +23,7 @@ app.controller('notesCtrl', function($scope,$timeout, NoteService){
 	$scope.delete = function(note){
 		NoteService.delete(note).then(function(result){
 			console.log('result from delete', result)
-		})
+		});
 	}
 
 	$scope.edit = function(note) {
@@ -49,12 +51,17 @@ app.controller('notesCtrl', function($scope,$timeout, NoteService){
 			return;
 		}
 
-		NoteService.update(note);
+		NoteService.update(note).then(function(result){
+			console.log('result from update', result)
+		});
+
 	};
 
 	$scope.revertEdits = function (note) {
 		console.log('evert edits');
+		notes[notes.indexOf(note)] = $scope.originalNote;
 		$scope.reverted = true;
+		$scope.originalNote = null;
 
 		/****Other and better solution if it was possible to pass $event to custom onEscape directive just like ng-blur does
 			It is better because you can truly reuse the directive. The way it is implemented just solves our specific problem.

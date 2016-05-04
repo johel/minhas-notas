@@ -55,6 +55,16 @@ exports.delete = function(req, res){
   })
 }
 
+exports.update = function(req, res){
+	var note = req.note;
+	console.log('req .body ---------', req.body );
+	note.update(req.body).then(function(){
+  	return res.json(note);
+  }).catch(function(err){
+  	return res.status(500).send(err);
+  })
+}
+
 
 exports.noteByID = function(req, res, next, id) {
 	Note.findById(id).then(function(note){
