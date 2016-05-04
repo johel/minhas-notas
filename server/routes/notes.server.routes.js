@@ -8,5 +8,6 @@ module.exports = function(app){
 		.get(notes.renderIndex);
 
 	app.route('/api/notes')
-	   .get(notes.list);
+	   .get(notes.list)
+	   .post(notes.create);
 }

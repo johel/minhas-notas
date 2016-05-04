@@ -35,8 +35,22 @@ app.factory('NoteService', function($http, $q){
 			return d.promise;
 
 		},
-		add:function(note){
-			this.notes.push(note);
+		add:function(){
+			var that = this;
+			var url = 'api/notes';
+			var request = $http.post(url, {});
+			var d = $q.defer();
+
+			request.then(function(response){
+				var note = response.data;
+				that.notes.unshift(note)
+				d.resolve(note);
+
+			}, function(error){
+				d.reject(error)
+			})
+
+			return d.promise;
 		},
 		findIndexById: function(id){
 		 	var index = -1;

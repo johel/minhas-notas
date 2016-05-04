@@ -17,7 +17,7 @@ exports.renderIndex = function(req, res, next) {
 // Create a new controller method that retrieves a list of todos
 exports.list = function(req, res) {
 	// console.log('logged user', req.user);
-	Note.findAll({
+	return Note.findAll({
 		where: {
 	    userId: req.user.id
   	},
@@ -31,4 +31,13 @@ exports.list = function(req, res) {
 		});
 	})
 
+};
+
+
+exports.create = function(req, res) {
+	return Note.create({userId:req.user.id}).then(function(note){
+		return res.json(note);
+	}).catch(function(err){
+		return res.status(500).send(err);
+	});
 };

@@ -10,8 +10,14 @@ app.controller('notesCtrl', function($scope,$timeout, NoteService){
 
 	
 	$scope.addNote = function(){
-		NoteService.add({});
+		NoteService.add().then(function(note){
+			console.log('new note id', note.id);
+		}, function(err){
+			console.log('err', err);
+		})
 	}
+
+
 	$scope.delete = function(note){
 		NoteService.delete(note);
 	}
