@@ -15,9 +15,8 @@
 	</li> -->
 	
 	<li class="note" ng-repeat="note in notes track by $index">
-		<input type="hidden" class="note-id" value="1">
 		<div class="content-wrapper" style="background-color: rgb(255, 247, 153);">
-			<div class="content" contenteditable="true">
+			<div ng-blur="saveEdits(note,$event)" class="content" contenteditable="true" on-escape="revertEdits(note)">
 			{{note.text}}
 			</div>
 		</div>
