@@ -31,7 +31,7 @@ module.directive('onEdit', function() {
 	      var modelCtrl = controllers[0];
 	      // view -> model
 	      elm.bind('blur', function() {
-	      		console.log('blur callback in link function')
+	      		// console.log('blur callback in link function')
 	          scope.$apply(function() {
 	              modelCtrl.$setViewValue(elm.html());
 	          });

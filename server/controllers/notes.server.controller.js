@@ -41,3 +41,28 @@ exports.create = function(req, res) {
 		return res.status(500).send(err);
 	});
 };
+
+exports.delete = function(req, res){
+	var note = req.note;
+	Note.destroy({
+    where: {
+      id: note.id
+    }
+  }).then(function(){
+  	return res.json(note);
+  }).catch(function(err){
+  	return res.status(500).send(err);
+  })
+}
+
+
+exports.noteByID = function(req, res, next, id) {
+	Note.findById(id).then(function(note){
+		req.note = note;
+		if (!note) return next(new Error('Failed to load note ' + id));
+
+		return next();
+	}).catch(function(err){
+		return next(err);
+	})
+};

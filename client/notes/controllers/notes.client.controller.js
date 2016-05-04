@@ -19,11 +19,13 @@ app.controller('notesCtrl', function($scope,$timeout, NoteService){
 
 
 	$scope.delete = function(note){
-		NoteService.delete(note);
+		NoteService.delete(note).then(function(result){
+			console.log('result from delete', result)
+		})
 	}
 
 	$scope.edit = function(note) {
-		console.log('clicked edit');
+		console.log('clicked edit', note.id);
 		$scope.editedNote = note;
 
 		//extend makes a shallow copy of own properties of one or more source objects
@@ -43,7 +45,7 @@ app.controller('notesCtrl', function($scope,$timeout, NoteService){
 
 		//if no changes were made to the original text
 		if (note.text === $scope.originalNote.text) {
-			console.log('exactly equal to original');
+			// console.log('exactly equal to original');
 			return;
 		}
 

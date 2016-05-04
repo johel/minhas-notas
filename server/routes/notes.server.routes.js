@@ -10,4 +10,11 @@ module.exports = function(app){
 	app.route('/api/notes')
 	   .get(notes.list)
 	   .post(notes.create);
+
+ 	app.route('/api/note/:noteId')
+ 		.delete(notes.delete);
+
+	// Set up the 'noteId' parameter middleware   
+	app.param('noteId', notes.noteByID);
+
 }
