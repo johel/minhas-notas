@@ -1,7 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<!-- Use the 'title' property to render a page title  -->
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/css/signin.css"/>
+</head>
+<body>
+
+  <div  class="container">
+
+    <form action="/signup" method="post" class="form-signin">
+      <label for="email" >Email</label>
+      <input  id="email" name="email" class="form-control" placeholder="Email Adress" required autofocus>
+      <label for="username" >Username</label>
+      <input  id="username" name="username" class="form-control" placeholder="Username" required>
+      <label for="password" >Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+
+			<div>
+				<p>Possui conta? <a href="/signin">Clique aqui</a></p>
+			</div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+    </form>
+
+  </div> 
+
+</body>
+
+
+<!-- <head>
 	<title><%= title %></title>
 </head>
 <body>
@@ -23,5 +51,5 @@
 			<input type="submit" value="Sign up" />
 		</div>
 	</form>
-</body>
+</body> -->
 </html>

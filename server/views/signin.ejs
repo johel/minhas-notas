@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<title><%= title %></title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/css/signin.css"/>
 </head>
 <body>
 
-	<!-- Render the signin form  -->
-	<form action="/signin" method="post">
-		<div>
-			<label>Username:</label>
-			<input type="text" name="username" />
-		</div>
-		<div>
-			<label>Password	:</label>
-			<input type="password" name="password" />
-		</div>
-		<div>
-			<input type="submit" value="Sign In" />
-		</div>
-	</form>
+  <div  class="container">
+
+    <form action="/signin" method="post" class="form-signin">
+      <label for="username" >Username</label>
+      <input  id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+      <label for="password" >Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+			<div>
+				<p>Não possui conta? <a href="/signup">Registre-se</a></p>
+			</div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+    </form>
+
+  </div> 
 
 </body>
 </html>
