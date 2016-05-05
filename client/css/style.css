@@ -36,6 +36,7 @@ a.tag:hover { background-color: #ccc; }
 
 /* Navigation */
 /* -------------------------------------------------------------- */
+
 nav#menu { overflow: hidden; position: fixed; z-index: 10000; left: 0; top: 0; right: 0; width: 100%; height: 36px; background-color: rgba(0,0,0,0.7); background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.1)), to(rgba(255,255,255,0))); -webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); padding: 0 2em; }
 nav#menu ul li { float: left; margin-right: 0; }
 nav#menu ul li a { display: block; padding: 10px 1.2em; height: 36px; color: #fff; font-weight: 600; text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3); }
@@ -48,12 +49,12 @@ nav#menu input#search-text { margin-top: 7px; margin-left: 1.5em; padding: 4px 5
 
 /* Full view */
 /* -------------------------------------------------------------- */
-#fullview-wrapper { position: fixed; top: 0; z-index: 9998; background: rgba(0, 0, 0, 0.3); width: 10000px; height: 10000px; display: none; }
+/*#fullview-wrapper { position: fixed; top: 0; z-index: 9998; background: rgba(0, 0, 0, 0.3); width: 10000px; height: 10000px; display: none; }
 #fullview-wrapper #fullview { position: fixed; top: -600px; z-index: 9999; margin: 0 auto; width: 1000px; height: 600px; background: url(images/note-noise.png), #fff799 -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.1)), color-stop(0.99, rgba(255,255,255,0.1))); -webkit-box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.5); border-radius: 2px; overflow: hidden; -webkit-transition: top 2s ease-in-out; }
 #fullview-wrapper #fullview #map_canvas { position: absolute; right: -5px; top: 30px; width: 500px; height: 500px; border-radius: 2px; }
 #fullview-wrapper #fullview .actions { position: absolute; bottom: 15px; right: 30px; }
 #fullview-wrapper #fullview .actions a { display: block; padding: 5px 10px; background: #333; color: #fff; font-size: 12px; border-radius: 2px; }
-#fullview-wrapper.show #fullview { top: 30px; -webkit-transition: all 2s ease-in-out; }
+#fullview-wrapper.show #fullview { top: 30px; -webkit-transition: all 2s ease-in-out; }*/
 
 /* Content */
 /* -------------------------------------------------------------- */

@@ -78,9 +78,7 @@ exports.signout = function(req, res) {
 //middleware
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
-		return res.status(401).send({
-			message: 'User is not logged in'
-		});
+		res.redirect('/signin');
 	}
-	next();
+	return next();
 };

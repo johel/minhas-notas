@@ -76,3 +76,13 @@ exports.noteByID = function(req, res, next, id) {
 		return next(err);
 	})
 };
+
+exports.hasAuthorization = function(req, res, next) {
+	if (req.note.userId !== req.user.id) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	return next();
+};
